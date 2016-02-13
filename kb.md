@@ -18,7 +18,7 @@ Coleção de links interessantes.
 * [Rob Conery](https://twitter.com/robconery) - Migrou do .NET para Elixir. Criou o [Red: 4](http://www.redfour.io/), um tutorial sobre Elixir
 * [Chris McCord](https://twitter.com/chris_mccord) - Criador do [Phoenix](http://www.phoenixframework.org/), o framework web para Elixir
 * [Brujo Benavides](https://twitter.com/elbrujohalcon) - CTO da Inaka, empresa argentina especializada em projetos com Erlang
-* [Conrad Barski](https://twitter.com/lisperati) - Esse cara era médico, se apaixonou por programação e escreveu um livro (Land of LISP) de grande sucesso. Ultimamente anda muito interessado em Bitcoin
+* [Conrad Barski](https://twitter.com/lisperati) - Esse cara era médico, se apaixonou por programação e escreveu um livro ([Land of LISP](http://landoflisp.com/)) de grande sucesso. Ultimamente anda muito interessado em Bitcoin
 * [Carin Meier](https://twitter.com/gigasquid) - De dançarina profissional de ballet para especialista em Clojure. Escreveu o livro [Living Clojure](http://shop.oreilly.com/product/0636920034292.do)
 * [Scott Wlaschin](https://twitter.com/ScottWlaschin) - Especialista em F#. É dono do [F# for Fun and Profit](http://fsharpforfunandprofit.com/), onde publica artigos bastante completos e complexos, explorando de forma bastante profunda os conceitos funcionais. Sabe muito!!!!
 * [André Staltz](https://twitter.com/andrestaltz) - Criador do [cycle.js](http://cycle.js.org/), especialista em programação reativa no frontend com js
