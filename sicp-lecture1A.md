@@ -128,7 +128,7 @@ Square root algorithm (of Heron of Alexandria)
   * To find a approximation to `SQRT(x)`
   	* Make a guess `guess`
   	* Improve that guess by averaging `guess` and `x/guess`
-  	* Keep imporoving that guess until it is good enough
+  	* Keep improving that guess until it is good enough
   	* Use 1 as initial guess
   
 **Implementation**
@@ -194,3 +194,17 @@ Particular way of packaging internals inside of a definition
 
 
 **How to create conventional methods of doing things?**
+
+	> (define (SQRT x) 
+		(TRY 1 x)	
+		(define TRY guess
+			(if (GOOD-ENOUGH? guess)
+				(guess)
+				(TRY (IMPROVE guess))))
+		(define (IMPROVE guess)
+			(AVERAGE guess (/ x guess)))
+		(define (GOOD-ENOUGH? guess)
+			(< (ABS (- x (SQUARE guess)))))
+		(define (SQUARE guess)
+			(* guess guess)))
+	
