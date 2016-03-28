@@ -247,7 +247,7 @@ The purpose is feeling out how the program represents itself as the rule for the
 The way in which you would construct a recursive process is by a free **wishful thinking**.
 
 	> (define (MOVE N FROM TO SPARE)
-		(cond ((= N 0) "Weel done!")
+		(cond ((= N 0) "Well done!")
 			  (else 
 			  (MOVE (-1+ N) FROM SPARE TO)
 			  (PRINT-MOVE FROM TO)
