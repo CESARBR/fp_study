@@ -216,7 +216,7 @@ The purpose is feeling out how the program represents itself as the rule for the
 	> (+ 2 1)
 	> 3
 
-**Evaluation tree **	
+**Evaluation tree**	
 
 					   (FIB 4)
 				  	  /       \
@@ -247,7 +247,7 @@ The purpose is feeling out how the program represents itself as the rule for the
 The way in which you would construct a recursive process is by a free **wishful thinking**.
 
 	> (define (MOVE N FROM TO SPARE)
-		(cond ((= N 0) "Well done!")
+		(cond ((= N 0) "")
 			  (else 
 			  (MOVE (-1+ N) FROM SPARE TO)
 			  (PRINT-MOVE FROM TO)
@@ -258,12 +258,31 @@ N is the height of the tower
 
 **Reduction**
 
-*TODO*
+	> (MOVE 3 1 2 3)
+	> ((MOVE 2 1 3 2) (PRINT-MOVE 1 2) (MOVE 2 3 2 1))
+	> (((MOVE 1 1 2 3) (PRINT-MOVE 1 3) (MOVE 1 2 3 1)) (PRINT-MOVE 1 2) ((MOVE 1 3 1 2) (PRINT-MOVE 3 2) (MOVE 1 1 2 3)))
+	> ((((MOVE 0 1 3 2) (PRINT-MOVE 1 2) (MOVE 0 3 2 1)) (PRINT-MOVE 1 3) ((MOVE 0 2 1 3) (PRINT-MOVE 2 3) (MOVE 0 1 3 2))) (PRINT-MOVE 1 2) (((MOVE 0 3 2 1) (PRINT-MOVE 3 1) (MOVE 0 2 1 3)) (PRINT-MOVE 3 2) ((MOVE 0 1 3 2) (PRINT-MOVE 1 2) (MOVE 0 3 2 1))))
+	> ((("" "1->2" "") "1->3" ("" "2->3" "")) "1->2" (("" "3->1" "") "3->2" ("" "1->2" "")))
+	> "1->2, 1->3, 2->3, 1->2, 3->1, 3->2, 1->2"
 
-**Evaluation tree **	
+**Evaluation tree**	
 
-*TODO*
-					
+																						(MOVE 3 1 2 3)
+																								|
+																		((MOVE 2 1 3 2) (PRINT-MOVE 1 2) (MOVE 2 3 2 1))
+																		/						|						\
+										((MOVE 1 1 2 3) (PRINT-MOVE 1 3) (MOVE 1 2 3 1))      "1->2"	((MOVE 1 3 1 2) (PRINT-MOVE 3 2) (MOVE 1 1 2 3))
+										/						|				|								|				|						\
+		((MOVE 0 1 3 2) (PRINT-MOVE 1 2) (MOVE 0 3 2 1))      "1->3"			|								|		      "3->2"	((MOVE 0 1 3 2) (PRINT-MOVE 1 2) (MOVE 0 3 2 1))
+				|				|				|								|								|								|				|				|
+				""			  "1->2"			""		((MOVE 0 2 1 3) (PRINT-MOVE 2 3) (MOVE 0 1 3 2))		|								""		      "1->2"			""
+																|				|				|				|
+																""		      "2->3"			""				|
+																												|
+																						((MOVE 0 3 2 1) (PRINT-MOVE 3 1) (MOVE 0 2 1 3))
+																								|				|				|
+																								""		      "3->1"			""
+
 
 **Complexity**
 
