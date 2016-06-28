@@ -2,11 +2,11 @@
 
 ## Compound Data
 
-THe crucial idea is that when we're building, we divorce the task of building thing of the task of implementing the parts. And in a large system we have abstraction barriers like this at lots and lots and lots of levels. Now what we're giong to do is look at the same issues for **data**.
+The crucial idea is that when we're building, we divorce the task of building a thing of the task of implementing the parts. And in a large system we have abstraction barriers like this at lots and lots and lots of levels. Now what we're going to do is look at the same issues for **data**.
 
-###Representing a Rational Number (Fractions)
+### Representing a Rational Number (Fractions)
 
-Represeinting a Rational Number (Fractions), using the design strategy of Wishiful Thinking
+Representing a Rational Number (Fractions), using the design strategy of Wishiful Thinking
 
 **SUM (+)**: `N1/D1 + N2/D2 = (N1 * D1 + N2 * D2) / D1 * D2`
 
@@ -38,8 +38,8 @@ Represeinting a Rational Number (Fractions), using the design strategy of Wishif
 
 How can we go and package together a numerator and a denominator and actually make one of these entities? We need a kind of glue for data objects.
 
-###List Structure
-Is a way of gluig things together, and more precisely, Lisp provides a way of contructing things calles ***pairs***.
+### List Structure
+Is a way of gluig things together, and more precisely, Lisp provides a way of contructing things called ***pairs***.
 
 **The primitive operator `cons`**
 
@@ -53,7 +53,7 @@ Is a way of gluig things together, and more precisely, Lisp provides a way of co
 	
 	> (cdr X Y) ; Selects the second part of the pair P.
 	
-This is a conventional way of writing the Plato's idea of two  - draw a diagram to represent cons of two and three
+This is a conventional way of writing the Plato's idea of two - draw a diagram to represent cons of two and three
 
 	> (cons 2 3)
   	
@@ -93,24 +93,24 @@ Executing 1/2 + 1/4
 	> (DENOM ANS) ; -> 8
 	> 8
 	
-A better inplementation of MAKE-RAT
+A better implementation of MAKE-RAT
 
 	> (define (MAKE-RAT N D)
 		(let ((G (gdc N D)))
 			(cons (/ N G)
 				  (/ D G))))
 				  
-The important thing to notice here is there's a abstraction layer between the way that a rational number is constructed and the operations over theserational number.
+The important thing to notice here is that there's a abstraction layer between the way that a rational number is constructed and the operations over these rational number.
 
 **Abstraction Layers**
 
 	+RAT / *RAT / -RAT ... ; -> Use 
 	
-	ÎÎ
+	↕
 	
 	MAKE-RAT / NUMER / DENOM ; -> Abstraction Layer(Constructors and selectors) 
 	
-	ÎÎ
+	↕
 	
 	cons car cdr	; -> Representation Layer 
 
@@ -126,15 +126,15 @@ Defining +RAT without data abstraction
 
 One of the advantages of data abstraction is that we can have any representation of data objects (another way of contruct and select)
 	
-**Per instance, we can have another ways of contruct and select:**
+**For instance, we can have another ways of contruct and select:**
 *TODO*
 
-Which one is better? Depends On, if you I'm making a system where Im mostly constructing rational numbers and hardly aver looking at them, then it's probably better not to do that `gdc` computation when I construct them. If Im doing a system where I look at things a lot more then I construct them, then is probably better to do the work when I construct them.
+Which one is better? Depends on, if you I'm making a system where I'm mostly constructing rational numbers and hardly ever looking at them, then it's probably better not to do that `gdc` computation when I construct them. If I'm doing a system where I look at things a lot more then I construct them, then is probably better to do the work when I construct them.
 
-WHat that was doing is giving a name to the decicion of how Im going to do it, and then continuing as if we made the decision. And then eventually, when we really wanted it to work coming back and facing what we we really had to do. And in fact, we'll see a couple of times from now, that you may never have to choose any particular representation, ever, ever. Anyway, thats a very powerful design technique its the key reason people use data abstraction.
+What that was doing is giving a name to the decicion of how I'm going to do it, and then continuing as if we made the decision. And then eventually, when we really wanted it to work coming back and facing what we we really had to do. And in fact, we'll see a couple of times from now, that you may never have to choose any particular representation, ever, ever. Anyway, thats a very powerful design technique its the key reason people use data abstraction.
 
 
-###Representing geometric entities in the plane
+### Representing geometric entities in the plane
 
 **Representing points/vectors**
 
@@ -169,23 +169,23 @@ WHat that was doing is giving a name to the decicion of how Im going to do it, a
 
 	Segments
 	
-	ÎÎ
+	↕
 	
 	MAKE-SEG / SEG-START / SEG-END
 	
-	ÎÎ
+	↕
 	
 	Vectors
 	
-	ÎÎ
+	↕
 	
 	MAKE-VECTOR / XCOR / YCOR
 
-	ÎÎ
+	↕
 
  	Pairs
 
-One of your tests of quality for a means of combination that someone shows you is: **Are things closed under the means of combinations?**
+One of your tests of quality for a means of combination that someone shows you is: **are things closed under the means of combinations?**
 
 **Redefining length**
 
@@ -194,14 +194,17 @@ One of your tests of quality for a means of combination that someone shows you i
 			  (DY (- (cdr (car S) (cdr (cdr S)))))
 			 (sqrt (+ (square DX) (square DY)))))
 			 
+
+This isn't a good implementation of `LENGTH` because if for any reason the way `S` is represented changes, this `LENGTH` will need to be rewritten. This wouldn't happen in the previous implementation, as long as the selectors were reimplemented to mirror `S` changes.
+
 ###Using axioms to define data
 
 **Axiom for a rational number**
 
 	If X is (MAKE-RAT N D)
-		then (NUMER X) is N and (DENOM X) is D
+		then (NUMER X)/(DENOM X) is N/D
 		
-The basis for a rational number representation doesn't care about the "how to", it is below the layer of abstraction.
+The basis for a rational number representation doesn't care about the *how to*, it is below the layer of abstraction.
 
 **Axiom for a pairs**
 	
@@ -227,5 +230,17 @@ One possible definition of `cons`, `car` and `cdr`
 			  
 	> (define (cdr x) (x 2))
 	
-It satisfies the axiom (verify by substitution model).
+These implementations show how we can build data representations out of functions. Below there is an example of the reduction of `car`:
+
+	> (car (cons 37 49))
+	> (car (lambda (pick)
+			(cond ((= pick 1) 37)
+				  ((= pick 2) 49))))
+	> ((lambda (pick)
+			(cond ((= pick 1) 37)
+				  ((= pick 2) 49)))
+	   1)
+	> (cond	((= 1 1) 37)
+			((= 1 2) 49))
+	> 37
 
